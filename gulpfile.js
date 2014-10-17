@@ -15,7 +15,7 @@ var mochaPhantomJS = require('gulp-mocha-phantomjs');
 
 // code style
 var jshint = require('gulp-jshint');
-var coveralls = require('gulp-coveralls');
+//var coveralls = require('gulp-coveralls');
 
 // gulp helper
 var source = require('vinyl-source-stream'); // converts node streams into vinyl streams
@@ -38,7 +38,7 @@ var outputFileMin = join(buildDir,outputFile + ".min.js");
 
 // a failing test breaks the whole build chain
 gulp.task('build', ['build-browser', 'build-browser-gzip']);
-gulp.task('default', ['lint', 'test', 'coveralls', 'build']);
+gulp.task('default', ['lint', 'test', 'build']);
 
 gulp.task('lint', function() {
   return gulp.src('./lib/*.js')
@@ -73,12 +73,6 @@ gulp.task('build-test',['init'], function() {
     .pipe(gulp.dest(buildDir));
 });
 
-
-
-gulp.task('coveralls', function () {
-    return gulp.src('coverage/lcov.info')
-	.pipe(coveralls());
-});
 
 gulp.task('test-watch', function() {
    gulp.watch(['./src/**/*.js','./lib/**/*.js', './test/**/*.js'], function() {
